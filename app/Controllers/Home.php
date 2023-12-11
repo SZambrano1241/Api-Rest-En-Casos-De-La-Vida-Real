@@ -10,114 +10,86 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
-    public function verpersona(){       
-        $persona = array(
-            'Id' => '01',
-            'Nombre' => 'Robinson Rezabala',
-            'Edad' => 29,
-            'Ciudad' => 'Portoviejo',
-            'Ocupacion' => 'Estudiante',
-            'Hobbies' => array('Leer', 'Viajar', 'Programar'),
-            'Contacto' => array(
-                'Email' => 'rrezabala6714@utm.edu,ec',
-                'Telefono' => '123-456-7890'
-            )
-        );
-        
-       return $this->response->setJson($persona);
-    }
+    public function verEstudiante() {
+        $nombres = ['Juan', 'María', 'Carlos', 'Ana'];
+        $apellidos = ['López', 'Gómez', 'Rodríguez', 'Fernández'];
+        $ciudades = ['Quito', 'Guayaquil', 'Cuenca', 'Ambato'];
+        $ocupaciones = ['Estudiante', 'Profesional', 'Artista', 'Empresario'];
+        $hobbies = ['Bailar', 'Pintar', 'Deportes', 'Viajar'];
     
-    public function verpersona2() {
         $persona2 = array(
-            'Id' => '02',
-            'Nombre' => 'María López',
-            'Edad' => 35,
-            'Ciudad' => 'Quito',
-            'Ocupacion' => 'Profesional',
-            'Hobbies' => array('Bailar', 'Pintar', 'Deportes'),
+            'Id' => rand(1, 100),
+            'Nombre' => $nombres[array_rand($nombres)] . ' ' . $apellidos[array_rand($apellidos)],
+            'Edad' => rand(18, 60),
+            'Ciudad' => $ciudades[array_rand($ciudades)],
+            'Ocupacion' => $ocupaciones[array_rand($ocupaciones)],
+            'Hobbies' => array_rand(array_flip($hobbies), rand(1, 3)),
             'Contacto' => array(
-                'Email' => 'mlopez@example.com',
-                'Telefono' => '987-654-3210'
+                'Email' => strtolower(str_replace(' ', '', $nombres[array_rand($nombres)]) . '@example.com'),
+                'Telefono' => rand(100, 999) . '-' . rand(100, 999) . '-' . rand(1000, 9999)
             )
         );
     
         return $this->response->setJson($persona2);
     }
-
-    public function verpersona3() {
-        $persona3 = array(
-            'Id' => '03',
-            'Nombre' => 'Juan Pérez',
-            'Edad' => 40,
-            'Ciudad' => 'Guayaquil',
-            'Ocupacion' => 'Empresario',
-            'Hobbies' => array('Cocinar', 'Nadar', 'Leer'),
+    
+    public function verEmpleado() {
+        $nombres = ['Alejandro', 'Elena', 'Gabriel', 'Laura'];
+        $apellidos = ['Martínez', 'Gómez', 'Hernández', 'Pérez'];
+        $ciudades = ['Quito', 'Guayaquil', 'Cuenca', 'Ambato'];
+        $puestos = ['Analista', 'Gerente', 'Asistente', 'Especialista'];
+    
+        $empleado = array(
+            'Id' => rand(101, 200),
+            'Nombre' => $nombres[array_rand($nombres)] . ' ' . $apellidos[array_rand($apellidos)],
+            'Edad' => rand(22, 60),
+            'Ciudad' => $ciudades[array_rand($ciudades)],
+            'Puesto' => $puestos[array_rand($puestos)],
             'Contacto' => array(
-                'Email' => 'jperez@example.com',
-                'Telefono' => '555-123-4567'
+                'Email' => strtolower(str_replace(' ', '', $nombres[array_rand($nombres)]) . '@company.com'),
+                'Telefono' => rand(100, 999) . '-' . rand(100, 999) . '-' . rand(1000, 9999)
             )
         );
     
-        return $this->response->setJson($persona3);
+        return $this->response->setJson($empleado);
     }
-
-    public function verMascota(){       
-    $mascota = array(
-        'Id' => 'M01',
-        'Nombre' => 'Whiskers',
-        'Edad' => 3,
-        'Tipo' => 'Gato',
-        'Color' => 'Atigrado',
-        'Habilidades' => array('Saltar', 'Cazar', 'Ronronear'),
-        'Dueño' => array(
-            'Nombre' => 'Robinson Rezabala',
-            'Contacto' => array(
-                'Email' => 'rrezabala6714@utm.edu,ec',
-                'Telefono' => '123-456-7890'
-            )
-        )
-    );  
     
-    return $this->response->setJson($mascota);
-}
-
-public function verLibro(){       
-    $libro = array(
-        'ISBN' => '978-1-2345-6789-0',
-        'Titulo' => 'El Prisionero de Azkaban',
-        'Autor' => 'J.K. Rowling',
-        'Genero' => 'Fantasía',
-        'Paginas' => 384,
-        'Editorial' => 'Salamandra',
-        'AñoPublicacion' => 1999,
-        'Resumen' => 'El tercer libro de la serie de Harry Potter, donde enfrenta nuevos desafíos en Hogwarts.',
-        'Lectores' => array('Robinson Rezabala', 'Amelia García', 'Carlos Martínez'),
-    );  
-    return $this->response->setJson($libro);
-}
-
-
-    public function buscar($n = NULL) {
-    if (isset($n)) {
-        echo "Valor recibido: " . $n;
-        echo "\n \n\n";
-        switch ($n) {
-            case 1:
-                return $this->verpersona();
-                break;
-            case 2:
-                return $this->verpersona2();
-                break;
-            case 3:
-                return $this->verpersona3();
-                break;
-            default:
-                echo "Número de persona no válido.";
-                break;
-        }
-    } else {
-        echo "No se recibió ningún valor.";
+    public function verDocente() {
+        $nombres = ['Sandra', 'Luis', 'Carla', 'Javier'];
+        $apellidos = ['García', 'Vargas', 'López', 'Ramírez'];
+        $materias = ['Matemáticas', 'Literatura', 'Historia', 'Ciencias'];
+    
+        $docente = array(
+            'Id' => rand(201, 300),
+            'Nombre' => $nombres[array_rand($nombres)] . ' ' . $apellidos[array_rand($apellidos)],
+            'Edad' => rand(25, 65),
+            'Materia' => $materias[array_rand($materias)],
+            'Contacto' => array(
+                'Email' => strtolower(str_replace(' ', '', $nombres[array_rand($nombres)]) . '@school.edu'),
+                'Telefono' => rand(100, 999) . '-' . rand(100, 999) . '-' . rand(1000, 9999)
+            )
+        );
+    
+        return $this->response->setJson($docente);
     }
-}  
-      
+
+    public function verPersonalAdministrativo() {
+        $nombres = ['Roberto', 'Patricia', 'Alberto', 'Monica'];
+        $apellidos = ['Fernández', 'Ruiz', 'Gutiérrez', 'Martínez'];
+        $departamentos = ['Recursos Humanos', 'Finanzas', 'Tecnología', 'Administración'];
+    
+        $personalAdmin = array(
+            'Id' => rand(301, 400),
+            'Nombre' => $nombres[array_rand($nombres)] . ' ' . $apellidos[array_rand($apellidos)],
+            'Edad' => rand(22, 60),
+            'Departamento' => $departamentos[array_rand($departamentos)],
+            'Contacto' => array(
+                'Email' => strtolower(str_replace(' ', '', $nombres[array_rand($nombres)]) . '@company.com'),
+                'Telefono' => rand(100, 999) . '-' . rand(100, 999) . '-' . rand(1000, 9999)
+            )
+        );
+    
+        return $this->response->setJson($personalAdmin);
+    }
+    
 }
